@@ -1,3 +1,4 @@
+import { tap } from 'rxjs';
 import { UserService } from './../../../../shared/user.service';
 import { Component } from '@angular/core';
 
@@ -7,13 +8,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent {
-  products!: any[];
+  users!: any[];
 
-  constructor(private userService: UserService) {}
+  constructor(private service: UserService) {}
 
   ngOnInit() {
-    this.userService
-      .getUser()
-      .subscribe(({ data }: any) =>{ this.products = data, console.log(data)});
+    this.get();
+  }
+
+  public get() {
+    this.service.getUser().subscribe(({ data }: any) => {
+      (this.users = data), console.log(data);
+    });
+  }
+
+  public delete(id: number) {
+    this.service
+      .deleteUser(id)
+      .pipe(tap((response) => this.get()))
+      .subscribe();
   }
 }

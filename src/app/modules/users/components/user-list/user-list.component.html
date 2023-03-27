@@ -1,20 +1,35 @@
-<p-table [value]="products" [tableStyle]="{'min-width': '50rem'}">
+<p-table [value]="users" [tableStyle]="{ 'min-width': '50rem' }">
   <ng-template pTemplate="header">
-      <tr>
-          <th>Code</th>
-          <th>Avatar</th>
-          <th>Email</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-      </tr>
+    <tr>
+      <th>Code</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-product>
-      <tr>
-          <td>{{product.id}}</td>
-          <td>{{product.avatar}}</td>
-          <td>{{product.email}}</td>
-          <td>{{product.first_name}}</td>
-          <td>{{product.last_name}}</td>
-      </tr>
+
+  <ng-template pTemplate="body" let-user>
+    <tr>
+      <td>{{ user.id }}</td>
+      <td>
+        <p-avatar shape="circle" [image]="user.avatar"></p-avatar>
+        <span class="image-text">{{ user.first_name }}</span>
+      </td>
+      <td>{{ user.last_name }}</td>
+      <td>{{ user.email }}</td>
+      <td>
+        <i
+          class="pi pi-user-edit"
+          style="font-size: 1.5rem"
+          [routerLink]="['/users/update', user.id]"
+        ></i>
+        <i
+          class="pi pi-trash"
+          style="font-size: 1.5rem"
+          (click)="delete(user.id)"
+        ></i>
+      </td>
+    </tr>
   </ng-template>
 </p-table>

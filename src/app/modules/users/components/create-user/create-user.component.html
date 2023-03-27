@@ -1,1 +1,23 @@
-<p>create-user works!</p>
+<form [formGroup]="userForm">
+  <div class="p-float-label">
+    <input type="text" pInputText formControlName="firstName" />
+    <label for="inputtext">First Name</label>
+  </div>
+  <div class="p-float-label">
+    <input type="text" pInputText formControlName="lastName" />
+    <label for="inputtext">Last Name</label>
+  </div>
+  <div class="p-float-label">
+    <input type="text" pInputText formControlName="email" />
+    <label for="inputtext">Email</label>
+  </div>
+</form>
+<p-toast></p-toast>
+<button
+  pButton
+  pRipple
+  type="button"
+  [label]="isUpdateForm ? 'Actualizar' : 'Guardar'"
+  class="p-button-raised"
+  (click)="saveOrUpdate()"
+></button>
